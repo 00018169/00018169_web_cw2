@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  h2 Edit Book Review
+  
+  form(action=`/books/${book.id}?_method=PUT`, method='POST')
+    .form-group
+      label(for='title') Book Title:
+      input#title(type='text', name='title', value=book.title required)
+    
+    .form-group
+      label(for='author') Author:
+      input#author(type='text', name='author', value=book.author required)
+    
+    .form-group
+      label(for='genre') Genre:
+      select#genre(name='genre', required)
+        option(value='') Select a genre
+        option(value='Fiction', selected=book.genre === 'Fiction') Fiction
+        option(value='Non-Fiction', selected=book.genre === 'Non-Fiction') Non-Fiction
+        option(value='Fantasy', selected=book.genre === 'Fantasy') Fantasy
+        option(value='Science Fiction', selected=book.genre === 'Science Fiction') Science Fiction
+        option(value='Mystery', selected=book.genre === 'Mystery') Mystery
+        option(value='Adventure', selected=book.genre === 'Adventure') Adventure
+        option(value='Biography', selected=book.genre === 'Biography') Biography
+        option(value='History', selected=book.genre === 'History') History
+        option(value='Other', selected=book.genre === 'Other') Other
+    
+    .form-group
+      label(for='review') Your Review:
+      textarea#review(name='review', required)= book.review
+    
+    button(type='submit') Update Review
+    a.button(href='/books', style='margin-left: 10px;') Cancel

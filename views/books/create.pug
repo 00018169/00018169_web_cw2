@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  h2 Add New Book Review
+  
+  form(action='/books', method='POST')
+    .form-group
+      label(for='title') Book Title:
+      input#title(type='text', name='title', required)
+    
+    .form-group
+      label(for='author') Author:
+      input#author(type='text', name='author', required)
+    
+    .form-group
+      label(for='genre') Genre:
+      select#genre(name='genre', required)
+        option(value='') Select a genre
+        option(value='Fiction') Fiction
+        option(value='Non-Fiction') Non-Fiction
+        option(value='Fantasy') Fantasy
+        option(value='Science Fiction') Science Fiction
+        option(value='Mystery') Mystery
+        option(value='Adventure') Adventure
+        option(value='Biography') Biography
+        option(value='History') History
+        option(value='Other') Other
+    
+    .form-group
+      label(for='review') Your Review:
+      textarea#review(name='review', required)
+    
+    button(type='submit') Add Review
+    a.button(href='/books', style='margin-left: 10px;') Cancel

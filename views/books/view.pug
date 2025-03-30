@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .book-detail
+    h2= book.title
+    
+    .book-meta
+      p Author: #{book.author}
+      p Genre: #{book.genre}
+      if book.createdAt
+        p Added on: #{book.createdAt.toDateString()}
+      if book.updatedAt
+        p Last updated: #{book.updatedAt.toDateString()}
+    
+    h3 Review
+    .book-review
+      p= book.review
+    
+    .action-buttons
+      a.button(href=`/books/${book.id}/edit`) Edit Review
+      form.delete-form(action=`/books/${book.id}?_method=DELETE`, method='POST', style='display: inline;')
+        button.delete-button(type='submit') Delete Review
+      a.button(href='/books', style='margin-left: 10px;') Back to List

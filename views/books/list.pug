@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h2 All Book Reviews
+  
+  if books.length === 0
+    p We don't have any book reviews yet. Add the first one!
+  else
+    ul.books-list
+      each book in books
+        li.book-item
+          h3= book.title
+          p Author: #{book.author}
+          p Genre: #{book.genre}
+          p= book.review
+          .buttons
+            a(href=`/books/${book.id}`) Read
+            a(href=`/books/${book.id}/edit`) Edit
+            form.delete-form(action=`/books/${book.id}?_method=DELETE`, method='POST')
+              button.delete-button(type='submit') Delete
+  
+  a.add-button(href='/books/new') Add New Review
