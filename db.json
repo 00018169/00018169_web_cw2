@@ -1,0 +1,49 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "War and Peace",
+      "author": "Leo Tolstoy",
+      "genre": "Other",
+      "review": "An epic masterpiece depicting Russian society during the Napoleonic wars",
+      "createdAt": "2025-04-07T10:30:00.000Z",
+      "updatedAt": "2025-04-08T16:09:13.435Z"
+    },
+    {
+      "id": "2",
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "review": "The captivating beginning of the magical saga about a young wizard",
+      "createdAt": "2025-04-07T14:25:11.064Z",
+      "updatedAt": "2025-04-08T14:25:11.064Z"
+    },
+    {
+      "id": "3",
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Fiction",
+      "review": "A prophetic look at a totalitarian future society",
+      "createdAt": "2025-04-07T09:15:22.123Z",
+      "updatedAt": "2025-04-08T09:15:22.123Z"
+    },
+    {
+      "id": "4",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Fiction",
+      "review": "A powerful examination of racial injustice in the American South",
+      "createdAt": "2025-04-07T16:40:33.456Z",
+      "updatedAt": "2025-04-08T16:40:33.456Z"
+    },
+    {
+      "id": "5",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Fiction",
+      "review": "A brilliant portrayal of the American Dream and its corruption",
+      "createdAt": "2025-04-07T11:20:44.789Z",
+      "updatedAt": "2025-04-08T11:20:44.789Z"
+    }
+  ]
+}

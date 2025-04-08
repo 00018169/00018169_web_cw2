@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 
-// Получение всех отзывов
 router.get('/', (req, res) => {
 	const reviews = [
 		{
@@ -20,21 +19,15 @@ router.get('/', (req, res) => {
 	res.render('reviews', { reviews: reviews })
 })
 
-// Добавление нового отзыва
 router.post('/', (req, res) => {
-	// Здесь будет логика добавления
 	res.redirect('/reviews')
 })
 
-// Удаление отзыва
 router.post('/delete/:id', (req, res) => {
-	// Здесь будет логика удаления
 	res.redirect('/reviews')
 })
 
-// Обновление отзыва
 router.post('/update/:id', (req, res) => {
-	// Здесь будет логика обновления
 	res.redirect('/reviews')
 })
 

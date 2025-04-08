@@ -1,82 +1,100 @@
-const mongoose = require('mongoose')
+const fs = require('fs')
+const path = require('path')
 
-// Book schema definition
-const bookSchema = new mongoose.Schema({
-	title: {
-		type: String,
-		required: true,
-	},
-	author: {
-		type: String,
-		required: true,
-	},
-	genre: {
-		type: String,
-		required: true,
-	},
-	review: {
-		type: String,
-		required: true,
-	},
-})
+const dbPath = path.join(__dirname, '../../db.json')
 
-// Create Book model
-const Book = mongoose.model('Book', bookSchema)
-
-// Get all books
-exports.getAllBooks = async () => {
+const readBooksFromFile = () => {
 	try {
-		return await Book.find()
+		if (!fs.existsSync(dbPath)) {
+			fs.writeFileSync(dbPath, JSON.stringify({ books: [] }), 'utf8')
+			return { books: [] }
+		}
+		const data = fs.readFileSync(dbPath, 'utf8')
+		return JSON.parse(data)
+	} catch (error) {
+		console.error('Error reading from file:', error)
+		return { books: [] }
+	}
+}
+
+const writeBooksToFile = (data) => {
+	try {
+		fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf8')
+		return true
+	} catch (error) {
+		console.error('Error writing to file:', error)
+		return false
+	}
+}
+
+exports.getAllBooks = () => {
+	try {
+		const data = readBooksFromFile()
+		return data.books
 	} catch (error) {
 		console.error('Error getting books:', error)
 		return []
 	}
 }
 
-// Create a new book
-exports.createBook = async (bookData) => {
+exports.createBook = (bookData) => {
 	try {
-		const book = new Book({
+		const data = readBooksFromFile()
+		const book = {
+			id: Date.now().toString(),
 			...bookData,
 			createdAt: new Date(),
-		})
-		return await book.save()
+			updatedAt: new Date(),
+		}
+		data.books.push(book)
+		writeBooksToFile(data)
+		return book
 	} catch (error) {
 		console.error('Error creating book:', error)
 		return null
 	}
 }
 
-// Get a book by ID
-exports.getBookById = async (id) => {
+exports.getBookById = (id) => {
 	try {
-		return await Book.findById(id)
+		const data = readBooksFromFile()
+		return data.books.find((book) => book.id === id) || null
 	} catch (error) {
 		console.error('Error getting book by ID:', error)
 		return null
 	}
 }
 
-// Update a book
-exports.updateBook = async (id, bookData) => {
+exports.updateBook = (id, bookData) => {
 	try {
-		return await Book.findByIdAndUpdate(
+		const data = readBooksFromFile()
+		const index = data.books.findIndex((book) => book.id === id)
+		if (index === -1) return null
+
+		data.books[index] = {
+			...data.books[index],
+			...bookData,
 			id,
-			{
-				...bookData,
-			},
-			{ new: true },
-		)
+			updatedAt: new Date(),
+		}
+		writeBooksToFile(data)
+		return data.books[index]
 	} catch (error) {
 		console.error('Error updating book:', error)
 		return null
 	}
 }
 
-// Delete a book
-exports.deleteBook = async (id) => {
+exports.deleteBook = (id) => {
 	try {
-		return await Book.findByIdAndDelete(id)
+		const data = readBooksFromFile()
+		const index = data.books.findIndex((book) => book.id === id)
+		if (index === -1) return null
+
+		const deletedBook = data.books[index]
+		data.books = data.books.filter((book) => book.id !== id)
+		writeBooksToFile(data)
+		return deletedBook
 	} catch (error) {
 		console.error('Error deleting book:', error)
 		return null

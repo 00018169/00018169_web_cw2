@@ -126,9 +126,12 @@ button,
 	border-radius: 8px;
 	font-size: 1rem;
 	transition: all 0.3s;
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	text-decoration: none;
 	box-shadow: 0 2px 5px rgba(139, 107, 76, 0.3);
+	max-height: 40px;
 }
 
 button:hover,

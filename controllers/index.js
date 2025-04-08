@@ -1,4 +1,3 @@
-// Home page
 exports.getHomePage = (req, res) => {
 	res.render('index', {
 		title: 'Book Reviews App',
@@ -6,7 +5,6 @@ exports.getHomePage = (req, res) => {
 	})
 }
 
-// About page
 exports.getAboutPage = (req, res) => {
 	res.render('about', {
 		title: 'About Us',
